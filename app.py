@@ -62,17 +62,17 @@ if st.button("Predict", key="predict_button", help="Click to make a prediction."
         categorical = input_df.select_dtypes(exclude=[np.number]).columns.tolist()
 
 # Fit and transform the data
-        X_processed = pipeline.fit_transform(input_df)
+        X_processed = pipeline.transform(input_df)
 
 # Extracting feature names for numerical columns
         num_feature_names = numerical
 
 # Extracting feature names for categorical columns after one-hot encoding
         cat_encoder = pipeline.named_steps['preprocessor'].named_transformers_['cat'].named_steps['onehot']
-        at_feature_names = cat_encoder.get_feature_names_out(categorical)
+        cat_feature_names = cat_encoder.get_feature_names_out(categorical)
 
 # Concatenating numerical and categorical feature names
-        feature_names = num_feature_names + list(categorical)
+        feature_names = num_feature_names + list(cat_feature_names)
 
 # Convert X_processed to DataFrame
         final_df = pd.DataFrame(X_processed, columns=feature_names)
@@ -82,5 +82,5 @@ if st.button("Predict", key="predict_button", help="Click to make a prediction."
 
 # Display the prediction
         st.write(f"The predicted Access to electricity is: {prediction}.")
-        input_df.to_csv("data/input_data.csv", index=False)
+        #input_df.to_csv("data/input_data.csv", index=False)
         st.table(input_df)
