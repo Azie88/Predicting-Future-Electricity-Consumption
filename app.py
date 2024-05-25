@@ -9,7 +9,7 @@ import plotly.express as px
 pipeline = joblib.load('toolkit/Pipeline.joblib')
 model = joblib.load('toolkit/model.joblib')
 
-df = pd.read_csv('Dataset/predicted_data_access_consumption_2015_2029.csv')
+df = pd.read_csv('Electricity Dataset/predicted_data_access_consumption_2015_2029.csv')
 
 
 st.set_page_config(
